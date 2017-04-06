@@ -1,0 +1,19 @@
+version: 1
+shathel-env:
+  gav: git@github.com/s4s0l/shathel-stacks:vagrant:$version
+  mandatoryEnvs:
+      SOME_NEEDED_ENV: Description
+  user: ubuntu
+  phases:
+      image-preparation:
+        type: vagrant
+        name: Vagrantfile-image
+      infrastructure:
+        type: vagrant
+        name: Vagrantfile
+      setup:
+        type: ansible
+        name: ../common/hostname.yml
+      swarm:
+        type: ansible
+        name: ../common/swarmize.yml

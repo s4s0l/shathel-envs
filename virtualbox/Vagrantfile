@@ -1,0 +1,85 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Managers = ENV['SHATHEL_ENV_MANAGERS'].to_i
+Workers = ENV['SHATHEL_ENV_WORKERS'].to_i
+Solution = ENV['SHATHEL_ENV_SOLUTION_NAME']
+Ansible = ENV['SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY']
+KeysLocation = ENV['SHATHEL_ENVPACKAGE_KEY_DIR']
+PackageVersion = ENV['SHATHEL_ENVPACKAGE_VERSION']
+ShathelBoxPath = ENV['SHATHEL_ENVPACKAGE_IMAGE']
+
+
+
+
+
+
+if File.exist?(Ansible)
+  File.delete(Ansible)
+end
+AnsibleFile = File.open(Ansible, 'a')
+
+
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "shathel-env-#{PackageVersion}"
+  config.vm.box_url = "file://#{ShathelBoxPath}"
+  config.ssh.username = "ubuntu"
+  config.vm.box_check_update = true
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+
+  AnsibleFile.puts "[shathel_manager_hosts]"
+  (1..Managers).each { |i|
+    ip_num = "192.168.99.#{i+1}"
+    m_name = "#{Solution}-manager-#{i}"
+    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num} public_ip=#{ip_num} shathel_name=#{m_name}"
+    config.vm.define m_name do |manager|
+      manager.vm.network "private_network", ip: ip_num
+      manager.vm.provider "virtualbox" do |v|
+        v.name = m_name
+      end
+    end
+  }
+  AnsibleFile.puts "[shathel_worker_hosts]"
+  (1..Workers).each { |i|
+    ip_num = "192.168.99.#{i+1 + Managers}"
+    m_name = "#{Solution}-worker-#{i}"
+    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num} public_ip=#{ip_num} shathel_name=#{m_name}"
+    config.vm.define m_name do |manager|
+      manager.vm.network "private_network", ip: ip_num
+      manager.vm.provider "virtualbox" do |v|
+        v.name = m_name
+      end
+    end
+  }
+
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.memory = "1024"
+    vb.cpus = 1
+    vb.customize ["storagectl", :id,  "--name", "SCSI Controller", "--hostiocache", "on"]
+    vb.customize ["modifyvm", :id,  "--uartmode1", "disconnected", "--biosbootmenu", "disabled", "--boot1", "disk", "--boot2", "none", "--boot3", "none", "--boot4", "none"]
+    vb.customize ["storageattach", :id,  "--storagectl", "SCSI Controller", "--port", "0", "--nonrotational" ,"on"]
+    vb.customize ["storageattach", :id,  "--storagectl", "SCSI Controller", "--port", "1", "--nonrotational" ,"on"]
+  end
+
+
+  config.vm.provision "shell" do |s|
+    ssh_pub_key = File.readlines("#{KeysLocation}/id_rsa.pub").first.strip
+    box_user_name = config.ssh.username
+    s.inline = <<-SHELL
+      whoami
+      if [ ! -f /home/#{box_user_name}/.ssh/authorized_keys_addedx ]; then
+        echo #{ssh_pub_key} >> /home/#{box_user_name}/.ssh/authorized_keys
+        touch /home/#{box_user_name}/.ssh/authorized_keys_addedx
+      fi
+      ! (docker info | grep WARNING)
+    SHELL
+  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../common/noop.yml"
+  end
+
+end
