@@ -6,12 +6,12 @@ def SHATHEL_ENVPACKAGE_SETTINGS_DIR = new File("./.shathel-dir/settings").absolu
 def SHATHEL_ENVPACKAGE_TMP_DIR = new File("./.shathel-dir/tmp").absolutePath
 def SHATHEL_ENVPACKAGE_KEY_DIR = "${SHATHEL_ENVPACKAGE_SETTINGS_DIR}/key"
 def SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY = "${SHATHEL_ENVPACKAGE_SETTINGS_DIR}/ansible-inventory"
-def SHATHEL_ENVPACKAGE_VERSION = "1.4"
+def SHATHEL_ENVPACKAGE_VERSION = "1.6"
 def SHATHEL_ENVPACKAGE_IMAGE = "${SHATHEL_ENVPACKAGE_TMP_DIR}/shathel-env-${SHATHEL_ENVPACKAGE_VERSION}.box"
 def SHATHEL_ENVPACKAGE_USER = "ubuntu"
 def SHATHEL_ENVPACKAGE_CERTS_DIR = "${SHATHEL_ENVPACKAGE_SETTINGS_DIR}/certificates"
-def SHATHEL_ENV_MANAGERS = "2"
-def SHATHEL_ENV_WORKERS = "1"
+def SHATHEL_ENV_MANAGERS = "1"
+def SHATHEL_ENV_WORKERS = "0"
 def SHATHEL_SOLUTION_NAME = "shtl"
 def SHATHEL_ENV_NAME = "test"
 def SHATHEL_ENV_SOLUTION_NAME = "shtl-test"
@@ -80,7 +80,7 @@ exec("vagrant", vagrantEnvs).executeForOutput(workingDir, "up")
 
 exec("ansible-playbook", ansibleEnvs).executeForOutput(null, workingDir, [:],
         "-u", SHATHEL_ENVPACKAGE_USER.toString(),
-        "--timeout=60",
+        "--timeout=160",
         "--private-key=${SHATHEL_ENVPACKAGE_KEY_DIR}/id_rsa".toString(),
         "--inventory-file=${SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY}".toString(),
         "--extra-vars", ansibleExtraVars.toString(),
@@ -103,7 +103,7 @@ hosts.each {
 //invoke swarm
 exec("ansible-playbook", ansibleEnvs).executeForOutput(null, workingDir, [:],
         "-u", SHATHEL_ENVPACKAGE_USER.toString(),
-        "--timeout=60",
+        "--timeout=160",
         "--private-key=${SHATHEL_ENVPACKAGE_KEY_DIR}/id_rsa".toString(),
         "--inventory-file=${SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY}".toString(),
         "--extra-vars", ansibleExtraVars.toString(),

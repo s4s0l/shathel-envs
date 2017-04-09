@@ -32,10 +32,12 @@ Vagrant.configure("2") do |config|
   AnsibleFile.puts "[shathel_manager_hosts]"
   (1..Managers).each { |i|
     ip_num = "192.168.99.#{i+1}"
+    ip_num2 = "42.42.42.#{i+1}"
     m_name = "#{Solution}-manager-#{i}"
-    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num} public_ip=#{ip_num} shathel_name=#{m_name}"
+    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num2} public_ip=#{ip_num} shathel_name=#{m_name}"
     config.vm.define m_name do |manager|
       manager.vm.network "private_network", ip: ip_num
+      manager.vm.network "private_network", ip: ip_num2
       manager.vm.provider "virtualbox" do |v|
         v.name = m_name
       end
@@ -44,10 +46,12 @@ Vagrant.configure("2") do |config|
   AnsibleFile.puts "[shathel_worker_hosts]"
   (1..Workers).each { |i|
     ip_num = "192.168.99.#{i+1 + Managers}"
+    ip_num2 = "42.42.42.#{i+1+ Managers}"
     m_name = "#{Solution}-worker-#{i}"
-    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num} public_ip=#{ip_num} shathel_name=#{m_name}"
+    AnsibleFile.puts "#{ip_num} private_ip=#{ip_num2} public_ip=#{ip_num} shathel_name=#{m_name}"
     config.vm.define m_name do |manager|
       manager.vm.network "private_network", ip: ip_num
+      manager.vm.network "private_network", ip: ip_num2
       manager.vm.provider "virtualbox" do |v|
         v.name = m_name
       end

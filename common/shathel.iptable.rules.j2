@@ -1,0 +1,8 @@
+*filter
+:SHATHEL_FORWARD - [0:0]
+-I FORWARD 1 -j SHATHEL_FORWARD
+-A SHATHEL_FORWARD -i {{public_if}} -p tcp --dport 80 -j ACCEPT
+-A SHATHEL_FORWARD -i {{public_if}} -p tcp --dport 443 -j ACCEPT
+-A SHATHEL_FORWARD -i {{public_if}} -j DROP
+-A SHATHEL_FORWARD -j RETURN
+COMMIT
