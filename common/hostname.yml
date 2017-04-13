@@ -1,21 +1,17 @@
----
-- hosts: [shathel_manager_hosts,shathel_worker_hosts]
-  become: yes
-  tasks:
-    - name: Waiting for server to become available
-      delegate_to: 127.0.0.1
-      wait_for:
-        host: "{{ public_ip }}"
-        state: started
-        port: 22
-      become: no
-    - name: /etc/hosts change
-      lineinfile:
-        destfile: /etc/hosts
-        line: '127.0.1.1       {{shathel_name}}'
-        state: present
-    - name: Hostname Change
-      hostname:
-        name: "{{shathel_name}}"
+- name: Waiting for server to become available
+  delegate_to: 127.0.0.1
+  wait_for:
+    host: "{{ public_ip }}"
+    state: started
+    port: 22
+  become: no
+- name: /etc/hosts change
+  lineinfile:
+    destfile: /etc/hosts
+    line: '127.0.1.1       {{shathel_name}}'
+    state: present
+- name: Hostname Change
+  hostname:
+    name: "{{shathel_name}}"
 
 

@@ -7,7 +7,7 @@ if [ '-A FORWARD -j SHATHEL_FORWARD' != "$FIRST_RULE" ]; then
     echo "Old Rules:"
     /sbin/iptables -S FORWARD
     /sbin/iptables -D FORWARD -j SHATHEL_FORWARD || true
-    /sbin/iptables-restore -n < /etc/iptables/shathel.rules
+    /sbin/iptables -I FORWARD 1 -j SHATHEL_FORWARD
     echo "Restored SHATHEL_FORWARD rules"
 fi
 

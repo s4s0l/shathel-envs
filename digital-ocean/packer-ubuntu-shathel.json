@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "region": "{{user `shathel_env_doregion`}}",
+      "image": "{{user `shathel_env_doimage`}}",
+      "size": "{{user `shathel_env_dosize`}}",
+      "api_token": "{{user `shathel_env_dotoken`}}",
+      "private_networking": true,
+      "snapshot_name": "{{user `shathel_dosnapshotname`}}",
+      "ssh_username": "root"
+    }
+  ],
+  "variables": {
+    "shathel_env_doimage": "ubuntu-16-04-x64",
+    "shathel_env_dosize": "512mb",
+    "shathel_env_doregion": "nyc1",
+    "shathel_dosnapshotname": "{{env `SHATHEL_ENVPACKAGE_IMAGE_NAME`}}",
+    "shathel_env_dotoken": ""
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "./packer-ubuntu-shathel.sh"
+      ]
+    }
+  ]
+}

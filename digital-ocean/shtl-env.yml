@@ -3,14 +3,15 @@ shathel-env:
   gav: git@github.com/s4s0l/shathel-stacks:vagrant:$version
   mandatoryEnvs:
       SOME_NEEDED_ENV: Description
-  user: ubuntu
+  user: root
+
   phases:
       image-preparation:
-        type: vagrant
-        name: Vagrantfile-image
+        type: packer
+        name: packer-ubuntu-shathel.json
       infrastructure:
-        type: vagrant
-        name: Vagrantfile
+        type: terraform
+        name: ./tf
       setup:
         type: ansible
         name: ./playbook.yml

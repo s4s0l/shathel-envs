@@ -7,28 +7,7 @@
         path: /shathel-ansible
         state: directory
   tasks:
-      - name: Common Facts
-        set_fact:
-          head_node: "{{ groups['shathel_manager_hosts'][0] }}"
-          head_private_ip: "{{ hostvars[groups['shathel_manager_hosts'][0]]['private_ip'] }}"
-          private_ip: "{{hostvars[inventory_hostname]['private_ip']}}"
-          public_ip: "{{hostvars[inventory_hostname]['public_ip']}}"
-          current_is_manager: "{{inventory_hostname in groups['shathel_manager_hosts']}}"
-          current_name: "{{shathel_name}}"
-      - name: Manager Facts
-        set_fact:
-          current_index: "{{ groups['shathel_manager_hosts'].index(inventory_hostname) }}"
-          current_tag: "manager"
-        when:  current_is_manager
-      - name: Worker Facts
-        set_fact:
-            current_index: "{{ groups['shathel_worker_hosts'].index(inventory_hostname) }}"
-            current_tag: "worker"
-        when:  not current_is_manager
-
-      - name: Verifying node info
-        debug: msg="name={{current_name}}, manager={{current_is_manager}}, tag={{current_tag}}, head_ip={{head_private_ip}}, publicIp={{ public_ip }}, private_ip={{ private_ip }}"
-
+      - include: ./gatherfacts.yml
       - copy:
           src: "{{shathel_envpackage_certs_dir}}/{{current_name}}/server-key.pem"
           dest: /etc/docker/server-key.pem
@@ -56,7 +35,7 @@
           state: present
         notify:
             - restart dockerd
-      - include: ./firewall.yml
+
 
   handlers:
       - name: restart dockerd

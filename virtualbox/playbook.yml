@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  pre_tasks:
+    - name: Ansible Dir present
+      file:
+        path: /shathel-ansible
+        state: directory
+  tasks:
+      - include: ../common/gatherfacts.yml
+      - include: ../common/hostname.yml
+      - include: ../common/firewall.yml

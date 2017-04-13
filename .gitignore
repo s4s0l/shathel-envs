@@ -1,5 +1,6 @@
 .idea
 .shathel-dir
+.private
 .srl
 *.retry
 *.log
