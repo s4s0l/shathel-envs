@@ -31,8 +31,8 @@ sudo apt-get install docker-ce=17.03.1~ce-0~ubuntu-xenial -y
 
 echo "setting cgroup_enable=memory swapaccount=1"
 sudo grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
-sudo sed -i 's#^GRUB_CMDLINE_LINUX_DEFAULT="\\\(.*"\\\)$#GRUB_CMDLINE_LINUX_DEFAULT="cgroup_enable=memory swapaccount=1 \\1#' /etc/default/grub
-sudo sed -i 's#^GRUB_CMDLINE_LINUX="\\\(.*"\\\)$#GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1 \\1#' /etc/default/grub
+sudo sed -i 's#^GRUB_CMDLINE_LINUX_DEFAULT="\(.*"\)$#GRUB_CMDLINE_LINUX_DEFAULT="cgroup_enable=memory swapaccount=1 \1#' /etc/default/grub
+sudo sed -i 's#^GRUB_CMDLINE_LINUX="\(.*"\)$#GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1 \1#' /etc/default/grub
 echo "Verification"
 sudo grep GRUB_CMDLINE_LINUX /etc/default/grub
 sudo curl -s https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh -o /docker-verify.sh

@@ -1,25 +1,25 @@
 provider "digitalocean" {
-  token = "${var.do_token}"
+  token = "${var.SHATHEL_ENV_DO_TOKEN}"
 }
 
 resource "digitalocean_ssh_key" "shathel" {
-  name       = "${var.shathel_solution_name}-key"
-  public_key = "${file(var.key_public)}"
+  name = "${var.SHATHEL_ENV_SOLUTION_NAME}-key"
+  public_key = "${file(format("%s/id_rsa.pub",var.SHATHEL_ENVPACKAGE_KEY_DIR ) )}"
 }
 
-resource "digitalocean_tag" "shathel_tag" {
-  name = "shathel"
-}
+//resource "digitalocean_tag" "shathel_tag" {
+//  name = "shathel"
+//}
 
 resource "digitalocean_tag" "shathel_solution" {
-  name = "shathel-${var.shathel_solution_name}"
+  name = "shathel-${var.SHATHEL_ENV_SOLUTION_NAME}"
 }
-
-resource "digitalocean_tag" "shathel_worker" {
-  name = "shathel-worker"
-}
-
-resource "digitalocean_tag" "shathel_manager" {
-  name = "shathel-manager"
-}
+//
+//resource "digitalocean_tag" "shathel_worker" {
+//  name = "shathel-worker"
+//}
+//
+//resource "digitalocean_tag" "shathel_manager" {
+//  name = "shathel-manager"
+//}
 

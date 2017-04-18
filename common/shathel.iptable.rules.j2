@@ -7,6 +7,7 @@
 -A SHATHEL_FORWARD -i {{public_if}} -j DROP
 -A SHATHEL_FORWARD -j RETURN
 -I INPUT 1 -j SHATHEL_INPUT
+-A SHATHEL_INPUT -i {{public_if}} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A SHATHEL_INPUT -i {{public_if}} -p tcp --dport 22 -j ACCEPT
 -A SHATHEL_INPUT -i {{public_if}} -j DROP
 -A SHATHEL_FORWARD -j RETURN

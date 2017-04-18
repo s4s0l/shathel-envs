@@ -1,47 +1,36 @@
 resource "digitalocean_droplet" "shathel_manager" {
-  count = "${var.shathel_manager_count}"
-  image = "${var.do_image}"
-  region = "${var.do_region}"
-  name = "${var.shathel_solution_name}-manager-${count.index}"
-  size = "${var.do_size}"
-  backups = "${var.do_backups}"
+  count = "${var.SHATHEL_ENV_MANAGERS}"
+  image = "${var.SHATHEL_ENVPACKAGE_IMAGE_ID}"
+  region = "${var.SHATHEL_ENV_DO_REGION}"
+  name = "${var.SHATHEL_ENV_SOLUTION_NAME}-manager-${count.index+1}"
+  size = "${var.SHATHEL_ENV_DO_SIZE}"
+  backups = "${var.SHATHEL_ENV_DO_BACKUPS}"
   ssh_keys = [
     "${digitalocean_ssh_key.shathel.id}"]
   private_networking = true
-
-  //TODO check if user data script gives any advantage over provisioning below
-  connection {
-    user = "${var.do_user}"
-    private_key = "${file(var.key_private)}"
-    agent = false
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get install python -y",
-    ]
-  }
   tags = [
-    "${digitalocean_tag.shathel_manager.id}",
-    "${digitalocean_tag.shathel_solution.id}",
-    "${digitalocean_tag.shathel_tag.id}"
+    //see https://github.com/hashicorp/terraform/issues/9099
+    //    "${digitalocean_tag.shathel_tag.id}",
+    //    "${digitalocean_tag.shathel_manager.id}",
+    "${digitalocean_tag.shathel_solution.id}"
   ]
 }
 
 resource "digitalocean_droplet" "shathel_worker" {
-  count = "${var.shathel_worker_count}"
-  image = "${var.do_image}"
-  region = "${var.do_region}"
-  name = "${var.shathel_solution_name}-worker-${count.index}"
-  size = "${var.do_size}"
-  backups = "${var.do_backups}"
+  count = "${var.SHATHEL_ENV_WORKERS}"
+  image = "${var.SHATHEL_ENVPACKAGE_IMAGE_ID}"
+  region = "${var.SHATHEL_ENV_DO_REGION}"
+  name = "${var.SHATHEL_ENV_SOLUTION_NAME}-worker-${count.index+1}"
+  size = "${var.SHATHEL_ENV_DO_SIZE}"
+  backups = "${var.SHATHEL_ENV_DO_BACKUPS}"
   ssh_keys = [
     "${digitalocean_ssh_key.shathel.id}"]
   private_networking = true
   tags = [
-    "${digitalocean_tag.shathel_worker.id}",
+    //see https://github.com/hashicorp/terraform/issues/9099
+    //    "${digitalocean_tag.shathel_worker.id}",
+    //    "${digitalocean_tag.shathel_tag.id}"
     "${digitalocean_tag.shathel_solution.id}",
-    "${digitalocean_tag.shathel_tag.id}"
   ]
 }
 

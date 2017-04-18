@@ -1,37 +1,36 @@
-variable "do_token" {
+variable "SHATHEL_ENV_DO_TOKEN" {
 }
-variable "cloudflare_email" {
+variable "SHATHEL_ENV_CF_EMAIL" {
 }
-variable "cloudflare_token" {
+variable "SHATHEL_ENV_CF_TOKEN" {
 }
-variable "cloudflare_domain" {
+variable "SHATHEL_ENV_DOMAIN" {
 }
-variable "cloudflare_subdomain" {
+variable "SHATHEL_ENV_CF_DOMAIN" {
 }
-variable "shathel_solution_name" {
+variable "SHATHEL_ENV_SOLUTION_NAME" {
 }
-variable "key_public" {
+variable "SHATHEL_ENVPACKAGE_KEY_DIR" {
 }
-variable shathel_manager_count {
-
+variable SHATHEL_ENV_MANAGERS {
 }
-variable shathel_worker_count {
-
+variable SHATHEL_ENV_WORKERS {
 }
-
-variable "do_image" {
-  default = "ubuntu-16-04-x64"
+variable SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY {
 }
-variable "do_region" {
+variable "SHATHEL_ENVPACKAGE_IMAGE_ID" {
+  default = "this should be set by prepare.groovy"
+}
+variable "SHATHEL_ENV_DO_REGION" {
   default = "nyc1"
 }
-variable "do_size" {
+variable "SHATHEL_ENV_DO_SIZE" {
   default = "1gb"
 }
-variable "do_user" {
+variable "SHATHEL_ENV_DO_USER" {
   default = "root"
 }
-variable "do_backups" {
+variable "SHATHEL_ENV_DO_BACKUPS" {
   default = "false"
 }
 
