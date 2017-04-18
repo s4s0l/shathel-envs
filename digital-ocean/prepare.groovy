@@ -28,7 +28,8 @@ def ids = result.data.snapshots.findAll {
 println ids
 
 if (ids.isEmpty()) {
-    processor.run("packer", "APPLY", "./packer-ubuntu-shathel.json", env)
+    def x = processor.run("packer", "APPLY", "./packer-ubuntu-shathel.json", env)
+    assert x.retcode == 0
     result = getClient("https://api.digitalocean.com").get(getParams)
     assert result.status == 200
     ids = result.data.snapshots.findAll {

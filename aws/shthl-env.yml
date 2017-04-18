@@ -1,13 +1,14 @@
 version: 1
 shathel-env:
-  gav: git@github.com/s4s0l/shathel-stacks:digital-ocean:$version
+  gav: git@github.com/s4s0l/shathel-stacks:aws:$version
   mandatoryEnvs:
       SHATHEL_ENV_DOMAIN: Domain to be registered in Cloud Flare, should be subdomain of SHATHEL_ENV_CF_DOMAIN
-      SHATHEL_ENV_DO_TOKEN: Digital ocean token
+      SHATHEL_ENV_AWS_ACCESSKEY: Aws access key
+      SHATHEL_ENV_AWS_SECRETKEY: Aws secret key
       SHATHEL_ENV_CF_EMAIL: Cloud Flare email
       SHATHEL_ENV_CF_TOKEN: Cloud Flare token
       SHATHEL_ENV_CF_DOMAIN: Cloud Flare domain
-  user: root
+  user: ubuntu
 
   phases:
       image-preparation:

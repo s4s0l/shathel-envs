@@ -27,7 +27,7 @@ variable "SHATHEL_ENV_DO_REGION" {
 variable "SHATHEL_ENV_DO_SIZE" {
   default = "1gb"
 }
-variable "SHATHEL_ENV_DO_USER" {
+variable "SHATHEL_ENVPACKAGE_USER" {
   default = "root"
 }
 variable "SHATHEL_ENV_DO_BACKUPS" {

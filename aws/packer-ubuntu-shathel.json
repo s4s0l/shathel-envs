@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `shathel_env_aws_accesskey`}}",
+      "secret_key": "{{user `shathel_env_aws_secretkey`}}",
+      "region": "{{user `shathel_env_aws_region`}}",
+      "source_ami": "{{user `shathel_env_aws_source_ami`}}",
+      "instance_type": "{{user `shathel_env_aws_instancetype`}}",
+      "ssh_username": "{{user `shathel_envpackage_user`}}",
+      "ami_name": "{{user `shathel_envpackage_image_name`}}"
+    }
+  ],
+  "variables": {
+    "shathel_env_aws_source_ami": "ami-80861296",
+    "shathel_env_aws_region": "us-east-1",
+    "shathel_env_aws_instancetype": "t2.micro",
+    "shathel_env_aws_accesskey": "",
+    "shathel_env_aws_secretkey": "",
+    "shathel_envpackage_image_name": "",
+    "shathel_envpackage_user": "ubuntu"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "./packer-ubuntu-shathel.sh"
+      ]
+    }
+  ]
+}
