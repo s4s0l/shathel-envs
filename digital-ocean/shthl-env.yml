@@ -2,6 +2,8 @@ version: 1
 shathel-env:
   gav: git@github.com/s4s0l/shathel-stacks:digital-ocean:$version
   mandatoryEnvs:
+      SHATHEL_ENV_MANAGERS: Number of managers
+      SHATHEL_ENV_WORKERS: Number of workers
       SHATHEL_ENV_DOMAIN: Domain to be registered in Cloud Flare, should be subdomain of SHATHEL_ENV_CF_DOMAIN
       SHATHEL_ENV_DO_TOKEN: Digital ocean token
       SHATHEL_ENV_CF_EMAIL: Cloud Flare email

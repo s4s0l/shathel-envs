@@ -8,4 +8,4 @@
         state: directory
   tasks:
       - include: ../common/gatherfacts.yml
-      - include: ../common/firewall.yml
+#      - include: ../common/firewall.yml

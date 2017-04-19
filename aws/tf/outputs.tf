@@ -1,13 +1,16 @@
 data "template_file" "manager-details" {
   count = "${aws_eip.shathel_manager_ip.count}"
+//  depends_on = [
+//    "aws_eip.shathel_manager_ip",
+//  ]
   template = <<-EOF
               ${element(aws_eip.shathel_manager_ip.*.public_ip, count.index)} private_ip=${element(aws_eip.shathel_manager_ip.*.private_ip, count.index)} public_ip=${element(aws_eip.shathel_manager_ip.*.public_ip, count.index)} shathel_name=${element(aws_instance.shathel_manager.*.tags.Name, count.index)} shathel_role=manager
               EOF
 }
 data "template_file" "worker-details" {
-  count = "${aws_eip.shathel_worker_ip.count}"
+  count = "${aws_instance.shathel_worker.count}"
   template = <<-EOF
-              ${element(aws_eip.shathel_worker_ip.*.public_ip, count.index)} private_ip=${element(aws_eip.shathel_worker_ip.*.private_ip, count.index)} public_ip=${element(aws_eip.shathel_worker_ip.*.public_ip, count.index)} shathel_name=${element(aws_instance.shathel_worker.*.tags.Name, count.index)} shathel_role=worker
+              ${element(aws_instance.shathel_worker.*.public_dns, count.index)} private_ip=${element(aws_instance.shathel_worker.*.private_ip, count.index)} public_ip=${element(aws_instance.shathel_worker.*.public_dns, count.index)} shathel_name=${element(aws_instance.shathel_worker.*.tags.Name, count.index)} shathel_role=worker
               EOF
 }
 
