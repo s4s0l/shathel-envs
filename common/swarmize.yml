@@ -26,6 +26,11 @@
           owner: root
           group: root
           mode: 0444
+      - name: Install ca cert globally
+        blockinfile:
+          block: "{{ lookup('file', '{{shathel_envpackage_certs_dir}}/ca-cert.pem') }}"
+          dest: "/etc/ssl/certs/ca-certificates.crt"
+          backup: yes
       - name: DockerD options
         lineinfile:
           destfile: /lib/systemd/system/docker.service
