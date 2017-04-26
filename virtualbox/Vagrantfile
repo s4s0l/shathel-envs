@@ -8,6 +8,8 @@ Ansible = ENV['SHATHEL_ENVPACKAGE_ANSIBLE_INVENTORY']
 KeysLocation = ENV['SHATHEL_ENVPACKAGE_KEY_DIR']
 PackageName = ENV['SHATHEL_ENVPACKAGE_IMAGE_NAME']
 
+PrivateNetwork = ENV['SHATHEL_ENV_PRIVATE_NET'] == nil ? "42.42.42" : ENV['SHATHEL_ENV_PRIVATE_NET']
+PublicNetwork = ENV['SHATHEL_ENV_PUBLIC_NET'] == nil ? "192.168.99" : ENV['SHATHEL_ENV_PUBLIC_NET']
 
 
 
@@ -30,8 +32,8 @@ Vagrant.configure("2") do |config|
 
   AnsibleFile.puts "[shathel_manager_hosts]"
   (1..Managers).each { |i|
-    ip_num = "192.168.99.#{i+1}"
-    ip_num2 = "42.42.42.#{i+1}"
+    ip_num = "#{PublicNetwork}.#{i+1}"
+    ip_num2 = "#{PrivateNetwork}.#{i+1}"
     m_name = "#{Solution}-manager-#{i}"
     AnsibleFile.puts "#{ip_num} private_ip=#{ip_num2} public_ip=#{ip_num} shathel_name=#{m_name} shathel_role=manager"
     config.vm.define m_name do |manager|
@@ -44,8 +46,8 @@ Vagrant.configure("2") do |config|
   }
   AnsibleFile.puts "[shathel_worker_hosts]"
   (1..Workers).each { |i|
-    ip_num = "192.168.99.#{i+1 + Managers}"
-    ip_num2 = "42.42.42.#{i+1+ Managers}"
+    ip_num = "#{PublicNetwork}.#{i+1 + Managers}"
+    ip_num2 = "#{PrivateNetwork}.#{i+1+ Managers}"
     m_name = "#{Solution}-worker-#{i}"
     AnsibleFile.puts "#{ip_num} private_ip=#{ip_num2} public_ip=#{ip_num} shathel_name=#{m_name} shathel_role=worker"
     config.vm.define m_name do |manager|
