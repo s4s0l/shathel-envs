@@ -1,6 +1,6 @@
 version: 1
 shathel-env:
-  gav: git@github.com/s4s0l/shathel-stacks:aws:$version
+  gav: git@github.com/s4s0l/shathel-envs:aws:$version
   mandatoryEnvs:
       SHATHEL_ENV_MANAGERS: Number of managers
       SHATHEL_ENV_WORKERS: Number of workers
