@@ -7,5 +7,6 @@
         path: /shathel-ansible
         state: directory
   tasks:
+      - include: ../common/common.yml
       - include: ../common/gatherfacts.yml
 #      - include: ../common/firewall.yml
