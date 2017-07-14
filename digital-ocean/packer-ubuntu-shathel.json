@@ -16,11 +16,13 @@
     "shathel_env_do_size": "512mb",
     "shathel_env_do_region": "nyc1",
     "shathel_env_do_token": "",
+    "shathel_solution_docker_version": "17.03.1",
     "shathel_envpackage_image_name": ""
   },
   "provisioners": [
     {
       "type": "shell",
+      "environment_vars": ["INSTALL_DOCKER_VERSION={{user `shathel_solution_docker_version`}}"],
       "scripts": [
         "./packer-ubuntu-shathel.sh"
       ]
