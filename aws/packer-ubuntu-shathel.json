@@ -18,7 +18,7 @@
     "shathel_env_aws_accesskey": "",
     "shathel_env_aws_secretkey": "",
     "shathel_envpackage_image_name": "",
-    "shathel_solution_docker_version": "17.03.1",
+    "shathel_solution_docker_version": "17.06.0",
     "shathel_envpackage_user": "ubuntu"
   },
   "provisioners": [
