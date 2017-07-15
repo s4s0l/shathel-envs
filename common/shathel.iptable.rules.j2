@@ -1,14 +1,15 @@
 *filter
-:SHATHEL_FORWARD - [0:0]
+:DOCKER-USER - [0:0]
 :SHATHEL_INPUT - [0:0]
--I FORWARD 1 -j SHATHEL_FORWARD
--A SHATHEL_FORWARD -i {{public_if}} -p tcp --dport 80 -j ACCEPT
--A SHATHEL_FORWARD -i {{public_if}} -p tcp --dport 443 -j ACCEPT
--A SHATHEL_FORWARD -i {{public_if}} -j DROP
--A SHATHEL_FORWARD -j RETURN
+-A DOCKER-USER -s 172.17.0.0/16 -j RETURN
+-A DOCKER-USER -d 172.17.0.0/16 -j RETURN
+-A DOCKER-USER -s 172.18.0.0/16 -j RETURN
+-A DOCKER-USER -d 172.18.0.0/16 -p tcp --dport 80 -j RETURN
+-A DOCKER-USER -d 172.18.0.0/16 -p tcp --dport 443 -j RETURN
+-A DOCKER-USER -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+-A DOCKER-USER -j DROP
 -I INPUT 1 -j SHATHEL_INPUT
 -A SHATHEL_INPUT -i {{public_if}} -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A SHATHEL_INPUT -i {{public_if}} -p tcp --dport 22 -j ACCEPT
 -A SHATHEL_INPUT -i {{public_if}} -j DROP
--A SHATHEL_FORWARD -j RETURN
 COMMIT
