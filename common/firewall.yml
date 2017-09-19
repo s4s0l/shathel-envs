@@ -12,14 +12,14 @@
     state: directory
 - name: Shathel rules file
   template:
-      src: shathel.iptable.rules.j2
+      src: ../common/shathel.iptable.rules.j2
       dest: /etc/iptables/shathel.rules
       owner: root
       mode: 0644
   register: rules_command
 - name: Adding shathel iptables rules applied on startup
   template:
-      src: shathel.iptable.apply.j2
+      src: ../common/shathel.iptable.apply.j2
       dest: /etc/network/if-pre-up.d/shathel-iptables
       owner: root
       mode: 0755
