@@ -3,9 +3,10 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
+sudo apt-mark hold grub-legacy-ec2
 
 echo "sudo apt-get upgrade ..."
-sudo apt-get -y -o Dpkg::Options::="--force-confnew" upgrade
+sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 
 echo "sudo apt-get install python ..."
 sudo DEBIAN_FRONTEND=noninteractive apt-get install python htop iotop tree jq fail2ban vim mosh apt-transport-https ca-certificates curl software-properties-common -y
