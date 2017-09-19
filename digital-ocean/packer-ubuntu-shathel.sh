@@ -5,7 +5,7 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 
 echo "sudo apt-get upgrade ..."
-sudo apt-get upgrade -y
+sudo apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 echo "sudo apt-get install python ..."
 sudo DEBIAN_FRONTEND=noninteractive apt-get install python htop iotop tree jq fail2ban vim mosh apt-transport-https ca-certificates curl software-properties-common -y
