@@ -31,6 +31,10 @@ variable "SHATHEL_ENV_DO_ORGANISATION" { // ACCESS token
 variable "SHATHEL_ENV_DO_SIZE" {
   default = "VC1S"
 }
+variable "SHATHEL_ENV_DOCKER_VERSION" {
+  default = "17.06.0"
+}
+
 variable "SHATHEL_ENVPACKAGE_USER" {
   default = "root"
 }

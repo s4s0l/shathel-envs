@@ -61,6 +61,11 @@ resource "null_resource" "shathel_manager" {
   }
 
   provisioner "file" {
+    source      = "./docker-shathel.sh"
+    destination = "~/docker-shathel.sh"
+  }
+
+  provisioner "file" {
     source      = "${format("%s/id_rsa.pub",var.SHATHEL_ENVPACKAGE_KEY_DIR )}"
     destination = "/tmp/id_rsa_key.pub"
   }
@@ -69,7 +74,9 @@ resource "null_resource" "shathel_manager" {
     inline = [
       "cat /tmp/id_rsa_key.pub >> ~/.ssh/instance_keys",
       "scw-fetch-ssh-keys --upgrade",
-      "rm -f /tmp/id_rsa_key.pub"
+      "rm -f /tmp/id_rsa_key.pub",
+      "chmod +x ~/docker-shathel.sh",
+      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_VERSION}"
     ]
   }
 }
@@ -94,6 +101,11 @@ resource "null_resource" "shathel_worker" {
   }
 
   provisioner "file" {
+    source      = "./docker-shathel.sh"
+    destination = "~/docker-shathel.sh"
+  }
+
+  provisioner "file" {
     source      = "${format("%s/id_rsa.pub",var.SHATHEL_ENVPACKAGE_KEY_DIR )}"
     destination = "/tmp/id_rsa_key.pub"
   }
@@ -102,7 +114,9 @@ resource "null_resource" "shathel_worker" {
     inline = [
       "cat /tmp/id_rsa_key.pub >> ~/.ssh/instance_keys",
       "scw-fetch-ssh-keys --upgrade",
-      "rm -f /tmp/id_rsa_key.pub"
+      "rm -f /tmp/id_rsa_key.pub",
+      "chmod +x ~/docker-shathel.sh",
+      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_VERSION}"
     ]
   }
 }
