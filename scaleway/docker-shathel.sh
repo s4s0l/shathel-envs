@@ -5,7 +5,6 @@ INSTALL_DOCKER_VERSION=$1
 
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
-sudo apt-mark hold grub-legacy-ec2
 
 echo "sudo apt-get upgrade ..."
 sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
