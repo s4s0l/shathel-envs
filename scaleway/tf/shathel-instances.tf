@@ -56,7 +56,7 @@ resource "null_resource" "shathel_manager" {
   connection {
     type = "ssh"
     user = "root"
-    private_key = "${file(var.SHATHEL_ENVPACKAGE_SCALEWAY_PRIVATE_KEY)}"
+    private_key = "${file(var.SHATHEL_ENV_SCALEWAY_PRIVATE_KEY)}"
     host = "${element(scaleway_server.shathel_manager.*.public_ip,count.index)}"
   }
 
@@ -89,7 +89,7 @@ resource "null_resource" "shathel_worker" {
   connection {
     type = "ssh"
     user = "root"
-    private_key = "${file(var.SHATHEL_ENVPACKAGE_SCALEWAY_PRIVATE_KEY)}"
+    private_key = "${file(var.SHATHEL_ENV_SCALEWAY_PRIVATE_KEY)}"
     host = "${element(scaleway_server.shathel_worker.*.public_ip,count.index)}"
   }
 

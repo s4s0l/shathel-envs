@@ -9,8 +9,8 @@ shathel-env:
       SHATHEL_ENV_CF_EMAIL: Cloud Flare email
       SHATHEL_ENV_CF_TOKEN: Cloud Flare token
       SHATHEL_ENV_CF_DOMAIN: Cloud Flare domain
-      SHATHEL_ENVPACKAGE_SCALEWAY_PRIVATE_KEY: key localisation (the one uploaded to scaleway)
-      SHATHEL_ENVPACKAGE_DO_ORGANISATION: access token for scaleway
+      SHATHEL_ENV_SCALEWAY_PRIVATE_KEY: key localisation (the one uploaded to scaleway)
+      SHATHEL_ENV_DO_ORGANISATION: access token for scaleway
   user: root
 
   phases:

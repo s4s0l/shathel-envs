@@ -26,7 +26,7 @@ variable "SHATHEL_ENVPACKAGE_IMAGE_ID" {
 variable "SHATHEL_ENV_DO_REGION" {
   default = "par1"
 }
-variable "SHATHEL_ENVPACKAGE_DO_ORGANISATION" { // ACCESS token
+variable "SHATHEL_ENV_DO_ORGANISATION" { // ACCESS token
 }
 variable "SHATHEL_ENV_DO_SIZE" {
   default = "VC1S"
@@ -34,5 +34,5 @@ variable "SHATHEL_ENV_DO_SIZE" {
 variable "SHATHEL_ENVPACKAGE_USER" {
   default = "root"
 }
-variable "SHATHEL_ENVPACKAGE_SCALEWAY_PRIVATE_KEY" { // this is a key added mannualy on https://cloud.scaleway.com/#/credentials
+variable "SHATHEL_ENV_SCALEWAY_PRIVATE_KEY" { // this is a key added mannualy on https://cloud.scaleway.com/#/credentials
 }
