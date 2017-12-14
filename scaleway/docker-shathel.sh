@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 sudo apt-mark hold grub-legacy-ec2
 
+echo "this package asks interactively for strategy during upgrade though all Dpkg flags should handle it"
+sudo apt-get remove unattended-upgrades -y
+
 echo "sudo apt-get upgrade ..."
 sudo apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 
