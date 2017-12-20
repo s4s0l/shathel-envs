@@ -9,3 +9,4 @@
   tasks:
       - include: ../common/common.yml
       - include: ../common/gatherfacts.yml
+      - include: ../common/firewall_private.yml

@@ -5,10 +5,10 @@ provider "cloudflare" {
 
 
 resource "cloudflare_record" "shathel" {
-  count = "${scaleway_server.shathel_manager.count}"
+  count = "${scaleway_ip.manager_public_ip.count}"
   domain = "${var.SHATHEL_ENV_CF_DOMAIN}"
   name = "${var.SHATHEL_ENV_DOMAIN}"
   type = "A"
-  value = "${element(scaleway_server.shathel_manager.*.public_ip, count.index)}"
+  value = "${element(scaleway_ip.manager_public_ip.*.ip, count.index)}"
   proxied = false
 }
