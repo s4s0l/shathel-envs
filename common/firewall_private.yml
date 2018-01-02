@@ -12,7 +12,7 @@
     state: directory
 - name: Shathel rules file
   template:
-      src: ../common/shathel.iptable.rules.j2
+      src: ../common/shathel.iptable.rules.single.interface.j2
       dest: /etc/iptables/shathel.rules
       owner: root
       mode: 0644
