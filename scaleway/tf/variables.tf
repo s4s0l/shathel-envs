@@ -38,5 +38,22 @@ variable "SHATHEL_ENV_DOCKER_VERSION" {
 variable "SHATHEL_ENVPACKAGE_USER" {
   default = "root"
 }
+
+variable "SHATHEL_ENV_SCALEWAY_VOLUME_MANAGER_SIZE" {
+  default = "10"
+}
+
+variable "SHATHEL_ENV_SCALEWAY_VOLUME_MANAGER_TYPE" {
+  default = "l_ssd"
+}
+
+variable "SHATHEL_ENV_SCALEWAY_VOLUME_WORKER_SIZE" {
+  default = "10"
+}
+
+variable "SHATHEL_ENV_SCALEWAY_VOLUME_WORKER_TYPE" {
+  default = "l_ssd"
+}
+
 variable "SHATHEL_ENV_SCALEWAY_PRIVATE_KEY" { // this is a key added mannualy on https://cloud.scaleway.com/#/credentials
 }
