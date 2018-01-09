@@ -5,6 +5,11 @@ resource "scaleway_server" "shathel_manager" {
   name = "${var.SHATHEL_ENV_SOLUTION_NAME}-manager-${count.index+1}"
   security_group = "${scaleway_security_group.security.id}"
 
+  volume {
+    size_in_gb = "${var.SHATHEL_ENV_SCALEWAY_VOLUME_MANAGER_SIZE}"
+    type       = "${var.SHATHEL_ENV_SCALEWAY_VOLUME_MANAGER_TYPE}"
+  }
+
   tags = [
     "shathel-${var.SHATHEL_ENV_SOLUTION_NAME}"
   ]
@@ -17,6 +22,11 @@ resource "scaleway_server" "shathel_worker" {
   image = "${var.SHATHEL_ENVPACKAGE_IMAGE_ID}"
   name = "${var.SHATHEL_ENV_SOLUTION_NAME}-worker-${count.index+1}"
   security_group = "${scaleway_security_group.security.id}"
+
+  volume {
+    size_in_gb = "${var.SHATHEL_ENV_SCALEWAY_VOLUME_WORKER_SIZE}"
+    type       = "${var.SHATHEL_ENV_SCALEWAY_VOLUME_WORKER_TYPE}"
+  }
 
   tags = [
     "shathel-${var.SHATHEL_ENV_SOLUTION_NAME}"
