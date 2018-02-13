@@ -3,18 +3,19 @@
 DockerVersion = ENV['SHATHEL_SOLUTION_DOCKER_VERSION'] == nil ? "17.06.0" : ENV['SHATHEL_SOLUTION_DOCKER_VERSION']
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
-#  config.vm.box_version="20170331.0.0"
+#  config.vm.box_version="20180126.0.0"
 # https://atlas.hashicorp.com/ubuntu/boxes/xenial64
+  config.ssh.insert_key = false
   config.vm.box_check_update = true
   config.vm.provider "virtualbox" do |vb|
     vb.name = "shathel-temporary-image"
     vb.gui = false
     vb.memory = "1024"
     vb.cpus = 1
-    vb.customize ["storagectl", :id,  "--name", "SCSI Controller", "--hostiocache", "on"]
+    vb.customize ["storagectl", :id,  "--name", "SCSI", "--hostiocache", "on"]
     vb.customize ["modifyvm", :id,  "--uartmode1", "disconnected", "--biosbootmenu", "disabled", "--boot1", "disk", "--boot2", "none", "--boot3", "none", "--boot4", "none"]
-    vb.customize ["storageattach", :id,  "--storagectl", "SCSI Controller", "--port", "0", "--nonrotational" ,"on"]
-    vb.customize ["storageattach", :id,  "--storagectl", "SCSI Controller", "--port", "1", "--nonrotational" ,"on"]
+    vb.customize ["storageattach", :id,  "--storagectl", "SCSI", "--port", "0", "--nonrotational" ,"on"]
+    vb.customize ["storageattach", :id,  "--storagectl", "SCSI", "--port", "1", "--nonrotational" ,"on"]
   end
   config.vm.provision "shell" do |s|
     s.path = 'Vagrantfile-image.sh'

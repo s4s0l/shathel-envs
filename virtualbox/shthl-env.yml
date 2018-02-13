@@ -4,7 +4,7 @@ shathel-env:
   mandatoryEnvs:
     SHATHEL_ENV_MANAGERS: Number of managers
     SHATHEL_ENV_WORKERS: Number of workers
-  user: ubuntu
+  user: vagrant
   phases:
       image-preparation:
         type: groovy
