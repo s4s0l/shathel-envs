@@ -11,3 +11,4 @@
       - include: ../common/gatherfacts.yml
       - include: ../common/hostname.yml
       - include: ../common/firewall.yml
+      - include: ../common/update-docker.yml
