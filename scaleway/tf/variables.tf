@@ -32,7 +32,7 @@ variable "SHATHEL_ENV_SCALEWAY_SIZE" {
   default = "VC1S"
 }
 variable "SHATHEL_ENV_DOCKER_VERSION" {
-  default = "17.06.0"
+  default = "17.12.0"
 }
 
 variable "SHATHEL_ENVPACKAGE_USER" {

@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-DockerVersion = ENV['SHATHEL_SOLUTION_DOCKER_VERSION'] == nil ? "17.06.0" : ENV['SHATHEL_SOLUTION_DOCKER_VERSION']
+DockerVersion = ENV['SHATHEL_SOLUTION_DOCKER_VERSION'] == nil ? "17.12.0" : ENV['SHATHEL_SOLUTION_DOCKER_VERSION']
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_version="20180126.0.0"

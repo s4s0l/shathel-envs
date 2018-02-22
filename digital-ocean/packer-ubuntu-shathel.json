@@ -16,7 +16,7 @@
     "shathel_env_do_image_size": "512mb",
     "shathel_env_do_region": "nyc1",
     "shathel_env_do_token": "",
-    "shathel_solution_docker_version": "17.06.0",
+    "shathel_solution_docker_version": "17.12.0",
     "shathel_envpackage_image_name": ""
   },
   "provisioners": [
