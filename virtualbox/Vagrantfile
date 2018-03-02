@@ -11,6 +11,7 @@ PackageName = ENV['SHATHEL_ENVPACKAGE_IMAGE_NAME']
 PrivateNetwork = ENV['SHATHEL_ENV_PRIVATE_NET'] == nil ? "42.42.42" : ENV['SHATHEL_ENV_PRIVATE_NET']
 PublicNetwork = ENV['SHATHEL_ENV_PUBLIC_NET'] == nil ? "192.168.99" : ENV['SHATHEL_ENV_PUBLIC_NET']
 
+RamSize = ENV['SHATHEL_ENV_VBOX_MEMORY'] == nil ? "1024" : ENV['SHATHEL_ENV_VBOX_MEMORY']
 
 
 
@@ -65,7 +66,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.memory = "1024"
+    vb.memory = "#{RamSize}"
     vb.cpus = 1
     vb.customize ["storagectl", :id,  "--name", "SCSI", "--hostiocache", "on"]
     vb.customize ["modifyvm", :id,  "--uartmode1", "disconnected", "--biosbootmenu", "disabled", "--boot1", "disk", "--boot2", "none", "--boot3", "none", "--boot4", "none"]

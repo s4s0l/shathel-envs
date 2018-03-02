@@ -14,6 +14,9 @@ resource "digitalocean_droplet" "shathel_manager" {
     //    "${digitalocean_tag.shathel_manager.id}",
     "${digitalocean_tag.shathel_solution.id}"
   ]
+  lifecycle {
+    ignore_changes = ["volume_ids"]
+  }
 }
 
 resource "digitalocean_droplet" "shathel_worker" {
@@ -32,6 +35,9 @@ resource "digitalocean_droplet" "shathel_worker" {
     //    "${digitalocean_tag.shathel_tag.id}"
     "${digitalocean_tag.shathel_solution.id}",
   ]
+  lifecycle {
+    ignore_changes = ["volume_ids"]
+  }
 }
 
 

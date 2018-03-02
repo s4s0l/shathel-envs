@@ -10,3 +10,4 @@
       - include: ../common/common.yml
       - include: ../common/gatherfacts.yml
       - include: ../common/firewall_private.yml
+      - include: ../common/update-docker.yml

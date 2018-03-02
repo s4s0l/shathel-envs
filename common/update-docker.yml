@@ -1,0 +1,21 @@
+- name: Check current docker version
+  shell: "docker version --format '{{ '{{' }}.Server.Version{{ '}}' }}'"
+  register: current_docker_version
+  failed_when: "current_docker_version.rc !=0"
+  changed_when: False
+  when: shathel_solution_docker_version is defined
+- set_fact:
+    expected_docker_version: "{{ shathel_solution_docker_version }}-ce"
+  changed_when: False
+  when: shathel_solution_docker_version is defined
+- name: Version found
+  debug: msg="dockerVersionFound:{{current_docker_version.stdout}}, expected:{{expected_docker_version}}"
+  changed_when: False
+  when: shathel_solution_docker_version is defined
+- name: Install new docker version`.
+  shell: |
+      sudo apt-get update
+      sudo apt-cache madison docker-ce
+      sudo apt-get install docker-ce={{shathel_solution_docker_version}}~ce-0~ubuntu -y
+  when: shathel_solution_docker_version is defined and current_docker_version.stdout != expected_docker_version
+
