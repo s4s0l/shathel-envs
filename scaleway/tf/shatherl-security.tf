@@ -1,8 +1,8 @@
 
-//resource "scaleway_security_group" "security" {
-//  name        = "${var.SHATHEL_ENV_SOLUTION_NAME}-security"
-//  description = "allow SSH, HTTP, Swarm and HTTPS traffic"
-//}
+resource "scaleway_security_group" "security" {
+  name        = "${var.SHATHEL_ENV_SOLUTION_NAME}-security"
+  description = "allow SSH, HTTP, Swarm and HTTPS traffic"
+}
 //
 //variable "secured_ports" {
 //  type        = "list"
