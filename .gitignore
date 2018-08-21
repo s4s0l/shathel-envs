@@ -2,5 +2,6 @@
 .shathel-dir
 .private
 .srl
+*.iml
 *.retry
 *.log

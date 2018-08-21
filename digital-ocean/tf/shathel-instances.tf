@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "shathel_worker" {
   image = "${var.SHATHEL_ENVPACKAGE_IMAGE_ID}"
   region = "${var.SHATHEL_ENV_DO_REGION}"
   name = "${var.SHATHEL_ENV_SOLUTION_NAME}-worker-${count.index+1}"
-  size = "${var.SHATHEL_ENV_DO_SIZE}"
+  size = "${var.SHATHEL_ENV_DO_WORKER_SIZE}"
   backups = "${var.SHATHEL_ENV_DO_BACKUPS}"
   ssh_keys = [
     "${digitalocean_ssh_key.shathel.id}"]

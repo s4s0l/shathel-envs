@@ -25,7 +25,10 @@ variable "SHATHEL_ENV_DO_REGION" {
   default = "nyc1"
 }
 variable "SHATHEL_ENV_DO_SIZE" {
-  default = "1gb"
+  default = "s-1vcpu-1gb"
+}
+variable "SHATHEL_ENV_DO_WORKER_SIZE" {
+  default = "s-1vcpu-1gb"
 }
 variable "SHATHEL_ENVPACKAGE_USER" {
   default = "root"
