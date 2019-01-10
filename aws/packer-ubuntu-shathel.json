@@ -18,13 +18,13 @@
     "shathel_env_aws_accesskey": "",
     "shathel_env_aws_secretkey": "",
     "shathel_envpackage_image_name": "",
-    "shathel_solution_docker_version": "17.12.0",
+    "shathel_solution_docker_package": "5:18.09.1~3-0~ubuntu-xenial",
     "shathel_envpackage_user": "ubuntu"
   },
   "provisioners": [
     {
       "type": "shell",
-      "environment_vars": ["INSTALL_DOCKER_VERSION={{user `shathel_solution_docker_version`}}"],
+      "environment_vars": ["INSTALL_DOCKER_VERSION={{user `shathel_solution_docker_package`}}"],
       "scripts": [
         "./packer-ubuntu-shathel.sh"
       ]

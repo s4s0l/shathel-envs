@@ -16,6 +16,6 @@
   shell: |
       sudo apt-get update
       sudo apt-cache madison docker-ce
-      sudo apt-get install docker-ce={{shathel_solution_docker_version}}~ce-0~ubuntu -y
+      sudo apt-get install docker-ce={{shathel_solution_docker_package}} -y
   when: shathel_solution_docker_version is defined and current_docker_version.stdout != expected_docker_version
 

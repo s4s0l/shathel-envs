@@ -32,4 +32,4 @@ echo "sudo apt-cache madison docker ..."
 sudo apt-cache madison docker-ce
 
 echo "sudo apt-get install docker ..."
-sudo apt-get install docker-ce=${INSTALL_DOCKER_VERSION}~ce-0~ubuntu -y
+sudo apt-get install docker-ce=${INSTALL_DOCKER_VERSION} -y

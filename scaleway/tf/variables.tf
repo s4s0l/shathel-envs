@@ -31,8 +31,9 @@ variable "SHATHEL_ENV_SCALEWAY_ORGANISATION" { // ACCESS token
 variable "SHATHEL_ENV_SCALEWAY_SIZE" {
   default = "VC1S"
 }
-variable "SHATHEL_ENV_DOCKER_VERSION" {
-  default = "17.12.0"
+
+variable "SHATHEL_SOLUTION_DOCKER_PACKAGE" {
+  default = "5:18.09.1~3-0~ubuntu-xenial"
 }
 
 variable "SHATHEL_ENVPACKAGE_USER" {

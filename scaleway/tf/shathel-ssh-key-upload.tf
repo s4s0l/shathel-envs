@@ -36,7 +36,7 @@ resource "null_resource" "shathel_manager" {
       "scw-fetch-ssh-keys --upgrade",
       "rm -f /tmp/id_rsa_key.pub",
       "chmod +x ~/docker-shathel.sh",
-      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_VERSION}"
+      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_PACKAGE}"
     ]
   }
 }
@@ -77,7 +77,7 @@ resource "null_resource" "shathel_worker" {
       "scw-fetch-ssh-keys --upgrade",
       "rm -f /tmp/id_rsa_key.pub",
       "chmod +x ~/docker-shathel.sh",
-      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_VERSION}"
+      "~/docker-shathel.sh ${var.SHATHEL_ENV_DOCKER_PACKAGE}"
     ]
   }
 }
