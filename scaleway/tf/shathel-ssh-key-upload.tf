@@ -13,7 +13,7 @@ resource "null_resource" "shathel_manager" {
     manager_ids = "${join(",",scaleway_ip.manager_public_ip.*.id)}"
   }
 
-  connecti2on {
+  connection {
     type = "ssh"
     user = "root"
     private_key = "${file(var.SHATHEL_ENV_SCALEWAY_PRIVATE_KEY)}"
