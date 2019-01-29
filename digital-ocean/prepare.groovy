@@ -14,6 +14,9 @@ import java.nio.file.attribute.PosixFilePermission
 
 
 def token = env['SHATHEL_ENV_DO_TOKEN']
+def baseImageName = env['SHATHEL_ENV_DO_IMAGE'] == null ? "ubuntu-16-04-x64" : env['SHATHEL_ENV_DO_IMAGE']
+def imageName = ("SHT-" + baseImageName)
+env['SHATHEL_ENVPACKAGE_SNAP_NAME'] = imageName
 def getParams(String token) {
     [
             contentType: ContentType.JSON,
@@ -24,7 +27,7 @@ def getParams(String token) {
 HttpResponseDecorator result = getClient("https://api.digitalocean.com").get(getParams(token))
 assert result.status == 200
 def ids = result.data.snapshots.findAll {
-    it.name == env['SHATHEL_ENVPACKAGE_IMAGE_NAME']
+    it.name.equalsIgnoreCase(imageName)
 }.collect { it.id }
 
 if (ids.isEmpty()) {
@@ -34,7 +37,7 @@ if (ids.isEmpty()) {
         result = getClient("https://api.digitalocean.com").get(getParams(token))
         assert result.status == 200
         ids = result.data.snapshots.findAll {
-            it.name == env['SHATHEL_ENVPACKAGE_IMAGE_NAME']
+            it.name.equalsIgnoreCase(imageName)
         }.collect { it.id }
         if (!ids.isEmpty()) {
             break

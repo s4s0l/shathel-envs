@@ -8,6 +8,9 @@ variable "SHATHEL_ENV_DOMAIN" {
 }
 variable "SHATHEL_ENV_CF_DOMAIN" {
 }
+variable "SHATHEL_ENV_CF_DOMAINS" {
+  default = ""
+}
 variable "SHATHEL_ENV_SOLUTION_NAME" {
 }
 variable "SHATHEL_ENVPACKAGE_KEY_DIR" {

@@ -1,13 +1,13 @@
 data "template_file" "manager-details" {
   count = "${scaleway_ip.manager_public_ip.count}"
   template = <<-EOF
-              ${element(scaleway_ip.manager_public_ip.*.ip, count.index)} private_ip=${element(scaleway_server.shathel_manager.*.private_ip, count.index)} public_ip=${element(scaleway_ip.manager_public_ip.*.ip, count.index)} shathel_name=${element(scaleway_server.shathel_manager.*.name, count.index)} shathel_role=manager
+              ${element(scaleway_ip.manager_public_ip.*.ip, count.index)} private_ip=${element(concat(scaleway_server.shathel_manager.*.private_ip,scaleway_server.shathel_manager_small.*.private_ip), count.index)} public_ip=${element(scaleway_ip.manager_public_ip.*.ip, count.index)} shathel_name=${element(concat(scaleway_server.shathel_manager.*.name, scaleway_server.shathel_manager_small.*.name), count.index)} shathel_role=manager
               EOF
 }
 data "template_file" "worker-details" {
   count = "${scaleway_ip.worker_public_ip.count}"
   template = <<-EOF
-              ${element(scaleway_ip.worker_public_ip.*.ip, count.index)} private_ip=${element(scaleway_server.shathel_worker.*.private_ip, count.index)} public_ip=${element(scaleway_ip.worker_public_ip.*.ip, count.index)} shathel_name=${element(scaleway_server.shathel_worker.*.name, count.index)} shathel_role=worker
+              ${element(scaleway_ip.worker_public_ip.*.ip, count.index)} private_ip=${element(concat(scaleway_server.shathel_worker.*.private_ip,scaleway_server.shathel_worker_small.*.private_ip), count.index)} public_ip=${element(scaleway_ip.worker_public_ip.*.ip, count.index)} shathel_name=${element(concat(scaleway_server.shathel_worker.*.name,scaleway_server.shathel_worker_small.*.name), count.index)} shathel_role=worker
               EOF
 }
 

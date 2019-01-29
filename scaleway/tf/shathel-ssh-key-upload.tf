@@ -4,6 +4,7 @@
 resource "null_resource" "shathel_manager" {
   depends_on = [
     "scaleway_server.shathel_manager",
+    "scaleway_server.shathel_manager_small",
     "scaleway_ip.manager_public_ip"
   ]
 
@@ -45,6 +46,7 @@ resource "null_resource" "shathel_manager" {
 resource "null_resource" "shathel_worker" {
   depends_on = [
     "scaleway_server.shathel_worker",
+    "scaleway_server.shathel_worker_small",
     "scaleway_ip.worker_public_ip"
   ]
 
