@@ -1,6 +1,6 @@
 data "scaleway_image" "img" {
   architecture = "x86_64"
-  name         = "${var.SHATHEL_ENVPACKAGE_IMAGE_NAME}"
+  name         = "${var.SHATHEL_ENV_SCALEWAY_SIZE == "START1-XS" ? "Ubuntu Mini Xenial 25G" : var.SHATHEL_ENVPACKAGE_IMAGE_NAME}"
 }
 
 

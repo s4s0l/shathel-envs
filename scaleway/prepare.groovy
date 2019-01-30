@@ -16,12 +16,6 @@ def volumeSizeMapping = [
         'X64-60GB' : '950',
 ]
 
-if(size == "START1-XS"){
-    env['SHATHEL_ENVPACKAGE_IMAGE_NAME'] = 'Ubuntu Mini Xenial 25G'
-}else {
-    env['SHATHEL_ENVPACKAGE_IMAGE_NAME'] = 'Ubuntu Xenial'
-}
-
 if(size.startsWith('X64')) {
     env['SHATHEL_ENVPACKAGE_VOLUME_TYPE'] = 'd_ssd'
 }
