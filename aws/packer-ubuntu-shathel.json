@@ -8,16 +8,16 @@
       "source_ami": "{{user `shathel_env_aws_source_ami`}}",
       "instance_type": "{{user `shathel_env_aws_instancetype`}}",
       "ssh_username": "{{user `shathel_envpackage_user`}}",
-      "ami_name": "{{user `shathel_envpackage_image_name`}}"
+      "ami_name": "{{user `shathel_envpackage_snap_name`}}"
     }
   ],
   "variables": {
-    "shathel_env_aws_source_ami": "ami-80861296",
-    "shathel_env_aws_region": "us-east-1",
-    "shathel_env_aws_instancetype": "t2.micro",
+    "shathel_env_aws_source_ami": "set by groovy",
+    "shathel_env_aws_region": "eu-central-1",
+    "shathel_env_aws_instancetype": "t3.micro",
     "shathel_env_aws_accesskey": "",
     "shathel_env_aws_secretkey": "",
-    "shathel_envpackage_image_name": "",
+    "shathel_envpackage_snap_name": "",
     "shathel_solution_docker_package": "5:18.09.1~3-0~ubuntu-xenial",
     "shathel_envpackage_user": "ubuntu"
   },

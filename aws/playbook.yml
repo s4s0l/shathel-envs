@@ -9,4 +9,5 @@
   tasks:
       - include: ../common/common.yml
       - include: ../common/gatherfacts.yml
+      - include: ../common/hostname.yml
       - include: ../common/update-docker.yml

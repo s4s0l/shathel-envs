@@ -1,4 +1,13 @@
 #!/usr/bin/env groovy
+
+if(env['SHATHEL_ENV_AWS_SOURCE_AMI'] == null){
+    env['SHATHEL_ENV_AWS_SOURCE_AMI'] = 'ami-05af84768964d3dc0'
+}
+
+
+def imageName = ("SHT-" + env['SHATHEL_ENV_AWS_SOURCE_AMI'])
+env['SHATHEL_ENVPACKAGE_SNAP_NAME'] = imageName
+
 def ami = null
 def x = processor.run("packer", "APPLY", "./packer-ubuntu-shathel.json", env)
 if (x.retcode == 1) {
