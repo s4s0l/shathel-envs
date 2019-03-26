@@ -26,6 +26,9 @@ resource "aws_instance" "shathel_manager" {
       "sudo echo Hello",
     ]
   }
+  root_block_device {
+    volume_size = "50"
+  }
   tags {
     Shathel = "true"
     ShathelSolution = "${var.SHATHEL_ENV_SOLUTION_NAME}"
@@ -69,6 +72,9 @@ resource "aws_instance" "shathel_worker" {
     inline = [
       "sudo echo Hello",
     ]
+  }
+  root_block_device {
+    volume_size = "50"
   }
   tags {
     Shathel = "true"
